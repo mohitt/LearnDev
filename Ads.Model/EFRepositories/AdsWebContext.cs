@@ -4,7 +4,7 @@ using Ads.Model.Entities;
 
 namespace Ads.Model.EFRepositories
 {
-    public class MyDbInitializer : DropCreateDatabaseIfModelChanges<AdsWebContext>
+    public class MyDbInitializer : CreateDatabaseIfNotExists<AdsWebContext>
     {
 
         protected override void Seed(AdsWebContext context) {
@@ -15,6 +15,7 @@ namespace Ads.Model.EFRepositories
             #endregion
         }
     }
+    
     public static class DbIntializer
     {
         public static void CreateContext() {
@@ -23,6 +24,7 @@ namespace Ads.Model.EFRepositories
 
         }
     }
+   
     public class AdsWebContext : DbContext
     {
 
