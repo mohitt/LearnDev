@@ -1,7 +1,5 @@
 ﻿
---##Ads
--- Use this Script to execute Intial Data..
-Use Ads
+-- use default db.
 
 Delete from dbo.Ads
 
