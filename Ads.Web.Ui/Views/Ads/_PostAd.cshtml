@@ -1,0 +1,54 @@
+﻿@Html.Button("post", "Post", HtmlButtonType.Submit, null, new { id = "btnPost" })
+<div id="loadableDiv">
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#btnPost').click(
+            function () {
+                var url = '@(Url.To<AdsController>(p => p.Create()))';
+                var dialog = $('#loadableDiv');
+                Ads.ajaxLoading(dialog);
+                dialog.dialog({ width: "800px"
+                                , modal: true
+                                , position: ['center', 40]
+                                , show: 'fadeIn'
+                                , resizable: false
+                                , title: 'Post an Ad'
+                });
+                dialog.load(url,
+                    function (responseText, textStatus, XMLHttpRequest) {
+                        //console.log(responseText, textStatus, XMLHttpRequest);
+                        dialog.css('text-align', 'left');
+                        dialog.dialog({
+                            buttons: [
+                                    {
+                                        text: "Save",
+                                        click: function () {
+                                            var formTag = $('#loadableDiv').find("form");
+                                            formTag.bind('submit', function (e) {
+                                                e.preventDefault(); // <-- important
+                                                $(this).ajaxSubmit({
+                                                    target: '#output'
+                                                });
+                                                //$(this).dialog("close");
+                                                //window.location.reload(true);
+                                            });
+                                            formTag.submit();
+                                        }
+                                    },
+                                    {
+                                        text: "Cancel",
+                                        click: function () {
+                                            $(this).dialog("close");
+                                            //reset div
+                                            Ads.resetFunction($(this));
+                                        }
+                                    }
+                                ]
+                        });
+                    });
+                return false;
+            }
+            );
+    });
+</script>

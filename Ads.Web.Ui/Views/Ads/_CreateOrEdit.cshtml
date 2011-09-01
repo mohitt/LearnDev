@@ -1,0 +1,89 @@
+@using Ads.Helper.Mvc
+@using MvcContrib.Pagination
+@model Ads.Model.Entities.Ad
+<script src="@Url.Content("~/Scripts/jquery.tmpl.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/knockout-1.2.1.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/knockout.mapping.js")" type="text/javascript"></script>
+<script type="text/javascript">
+       
+$(function() {
+    var viewModel = {
+        categories: ko.observableArray( @(new HtmlString((ViewBag.Categories as object).ToJson())))
+            ,initialData: ko.mapping.fromJS(@(new HtmlString(new Ad().ToJson())))
+            ,chosenCategory : ko.observable()
+            
+    };
+    viewModel.chosenCategoryText=ko.dependentObservable(function () {
+    // Knockout tracks dependencies automatically. It knows that fullName depends on firstName and lastName, because these get called when evaluating fullName.
+        viewModel.chosenCategory();
+        return $('#@(Model.GetPropertyName(k => k.CategoryId)) option:selected').text();
+        });
+    window.adPostModel = viewModel;
+   ko.applyBindings(viewModel); // Makes Knockout get to work
+            
+});
+</script>
+<div id="createAdDiv">
+    @using (Html.BeginForm()) {
+        @Html.ValidationSummary(true)
+        <fieldset>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CategoryId)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.CategoryId, (new List<SelectListItem>()).AsEnumerable()
+                , new {
+                    data_bind = @"options: categories
+                                    ,optionsCaption:'Choose...'
+                                    ,optionsText: '{0}'
+                                    ,optionsValue: '{1}'
+                                    ,value:chosenCategory"
+                        .FormatWith(CustomHtmlHelper.GetName<Category>(c => c.DisplayValue)
+                        , CustomHtmlHelper.GetName<Category>(c => c.Id))
+
+                })
+                @Html.ValidationMessageFor(model => model.CategoryId)
+            </div>
+            <div data-bind="visible: chosenCategory()" style="display: none;">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Title)
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.Title,
+                            new {
+                                data_bind = "value: initialData.{0},valueUpdate: 'afterkeydown'"
+                                .FormatWith(Model.GetPropertyName(m => m.Title)),
+                                style = "width:710px;"
+                            })
+                    @Html.ValidationMessageFor(model => model.Title)
+                </div>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Description)
+                </div>
+                <div class="editor-field">
+                    @Html.TextAreaFor(model => model.Description, 6, 70,
+                                new {
+                                    data_bind = "value: initialData.{0},valueUpdate: 'afterkeydown'"
+                                    .FormatWith(Model.GetPropertyName(m => m.Description)),
+                                    style = "width:710px; height:300px;"
+                                })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+                @if (!Request.IsAjaxRequest()) {
+                    <p>
+                        <input type="submit" value="Create" />
+                    </p>
+                }
+            </div>
+        </fieldset>
+    }
+    <div data-bind="visible: chosenCategory()">
+        This is how your ad gone look like ::
+        <div data-bind="text: chosenCategoryText">
+        </div>
+        <div data-bind="text:initialData.@(Model.GetPropertyName(m => m.Title))">
+        </div>
+        <div data-bind="text:initialData.@(Model.GetPropertyName(m => m.Description))">
+        </div>
+    </div>
+</div>

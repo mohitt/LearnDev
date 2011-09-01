@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@using (Html.BeginForm()) {
+    <div style="text-align: right;">
+        @{Html.RenderPartial("_Location");}
+        @(Html.Button<SearchController>("search", "Search", s => s.Index(), new { style = "margin-top:10px;" }))
+        @{
+    Html.RenderAction<AdsController>(ctrl => ctrl.InitCreate());
+        }
+    </div>
+    
+}
+@{Html.RenderAction<AdsController>(ctrl => ctrl.ListPartial(null));}
+@*@Html.Hidden("firstTimeLogin", (bool)ViewBag.UserLoggedIn)*@

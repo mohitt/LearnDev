@@ -1,0 +1,23 @@
+@model Ads.Model.Entities.Ad
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Ad</legend>
+
+    <div class="display-label">Name</div>
+    <div class="display-field">@Model.Title</div>
+
+    <div class="display-label">Description</div>
+    <div class="display-field">@Model.Description</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

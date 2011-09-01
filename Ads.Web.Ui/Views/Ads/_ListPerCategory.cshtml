@@ -1,0 +1,17 @@
+﻿<ul>
+    @foreach (var cat in Model) {
+        <li>
+            @cat.DisplayValue
+            <div>
+                <ul>
+                    @foreach (var ad in cat.Ads) {
+                        <li>@ad.Description
+                            <br />
+                            @ad.Title
+                        </li>
+                    }
+                </ul>
+            </div>
+        </li>
+    }
+</ul>

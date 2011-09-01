@@ -1,0 +1,17 @@
+﻿<header>
+    <div id="title">
+        <a href="@(Url.To<HomeController>(k => k.Index()))" style="text-decoration:none;">
+            <h1>
+                Desi Roomies</h1>
+        </a>
+    </div>
+    <div id="logindisplay">
+        @Html.Partial("_LogOnPartial")
+    </div>
+    <nav>
+        <ul id="menu">
+            @*<li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>*@ @*@Html.AllController(typeof(Ads.Web.Controllers.HomeController).Assembly)*@
+        </ul>
+    </nav>
+</header>

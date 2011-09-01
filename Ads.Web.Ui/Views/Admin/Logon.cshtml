@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Logon";
+    Layout = null;
+}
+<h2>
+    Enter your name</h2>
+@using (Html.BeginForm()) {
+    @Html.TextBox("username")
+    <br />
+    @Html.Password("password")
+    <br />
+    <input type="submit" value="enter your name" />
+}

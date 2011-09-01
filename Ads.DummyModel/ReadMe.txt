@@ -1,0 +1,1 @@
+﻿The only usage of this project is to ease the development by generating the model and DB Script

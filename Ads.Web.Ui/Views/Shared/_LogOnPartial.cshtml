@@ -1,0 +1,36 @@
+﻿@if (Request.IsAuthenticated) {
+    <text>Welcome <b>@Session[Ads.Helper.Constants.SessionConstants.DisplayName]</b> ! [ @Html.ActionLink("Log Off", "LogOff", "Account") ]</text>
+}
+else {
+    @:[ @Html.ActionLink("Log On", "OpenIdPopup", "Account", null, new { id = "logonLink" }) ]
+    <script type="text/javascript">
+        $(function () {
+            $('#logonLink').click(function () {
+                var dialog = $('#loginDiv');
+                Ads.ajaxLoading(dialog);
+                dialog.dialog({ width: "800px", modal: true, position: ['center', 40], show: 'fadeIn', resizable: false, title: 'Choose one of the Login Providers' });
+                // load remote content 
+                dialog.load(
+                            '@(Url.To<AccountController>(K=>K.OpenIdPopup()))',
+                            function (responseText, textStatus, XMLHttpRequest) {
+                                (function () {
+                                    openid.img_path = '@(Url.Content("~/Content/images/"))';
+                                    openid.input_id = 'OpenIdIdentifier';
+                                    openid.init('OpenIdIdentifier');
+                                    openid.setDemoMode(false); //Stops form submission for client javascript-only test purposes
+                                    $("#openid_form").width("600px");
+                                    $('#openid_submit').button();
+                                    $('#openid_submit').css("margin-left", "10px");
+                                })();
+                            }
+                        );
+
+                //prevent the browser to follow the link
+                return false;
+            }
+        )
+        });
+    </script>
+    <div id="loginDiv">
+    </div>
+} 

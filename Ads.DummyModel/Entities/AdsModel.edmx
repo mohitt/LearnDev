@@ -1,0 +1,672 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- EF Runtime content -->
+    <edmx:Runtime>
+        <!-- SSDL content -->
+        <edmx:StorageModels>
+        <Schema Namespace="Ads.Model.Entities.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="AdsModelEntitiesStoreContainer">
+    <EntitySet Name="Ads" EntityType="Ads.Model.Entities.Store.Ads" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="Ads.Model.Entities.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="States" EntityType="Ads.Model.Entities.Store.States" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Categories" EntityType="Ads.Model.Entities.Store.Categories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Keywords" EntityType="Ads.Model.Entities.Store.Keywords" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Countries" EntityType="Ads.Model.Entities.Store.Countries" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Cities" EntityType="Ads.Model.Entities.Store.Cities" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Aspects" EntityType="Ads.Model.Entities.Store.Aspects" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Addresses" EntityType="Ads.Model.Entities.Store.Addresses" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AdTypes" EntityType="Ads.Model.Entities.Store.AdTypes" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="AdCategory" Association="Ads.Model.Entities.Store.AdCategory">
+      <End Role="Ad" EntitySet="Ads" />
+      <End Role="Category" EntitySet="Categories" />
+    </AssociationSet>
+    <AssociationSet Name="CountryState" Association="Ads.Model.Entities.Store.CountryState">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="State" EntitySet="States" />
+    </AssociationSet>
+    <AssociationSet Name="StateCity" Association="Ads.Model.Entities.Store.StateCity">
+      <End Role="State" EntitySet="States" />
+      <End Role="City" EntitySet="Cities" />
+    </AssociationSet>
+    <AssociationSet Name="UserAd" Association="Ads.Model.Entities.Store.UserAd">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Ad" EntitySet="Ads" />
+    </AssociationSet>
+    <AssociationSet Name="AddressCity" Association="Ads.Model.Entities.Store.AddressCity">
+      <End Role="Address" EntitySet="Addresses" />
+      <End Role="City" EntitySet="Cities" />
+    </AssociationSet>
+    <AssociationSet Name="AdAdType" Association="Ads.Model.Entities.Store.AdAdType">
+      <End Role="Ad" EntitySet="Ads" />
+      <End Role="AdType" EntitySet="AdTypes" />
+    </AssociationSet>
+    <AssociationSet Name="AdAddress" Association="Ads.Model.Entities.Store.AdAddress">
+      <End Role="Ad" EntitySet="Ads" />
+      <End Role="Address" EntitySet="Addresses" />
+    </AssociationSet>
+    <AssociationSet Name="CategorySubCategory" Association="Ads.Model.Entities.Store.CategorySubCategory">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Category1" EntitySet="Categories" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Ads">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="AdTypeId" Type="int" Nullable="false" />
+    <Property Name="AddressId" Type="int" Nullable="true" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="LastUpdatedOn" Type="datetime" Nullable="false" />
+    <Property Name="LastUpdatedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="RealName" Type="nvarchar" Nullable="false" MaxLength="40" />
+    <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="40" />
+    <Property Name="OpenId" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="LastUpdatedOn" Type="datetime" Nullable="false" />
+    <Property Name="LastUpdatedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="States">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Abbriviation" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CountryId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AttDefXML" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="DisplayValue" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ParentCategoryId" Type="int" Nullable="true" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="LastUpdatedOn" Type="datetime" Nullable="false" />
+    <Property Name="LastUpdatedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Keywords">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Countries">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cities">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="StateId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Aspects">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Addresses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Property" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="City_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AdTypes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <Association Name="AdCategory">
+    <End Role="Ad" Type="Ads.Model.Entities.Store.Ads" Multiplicity="*" />
+    <End Role="Category" Type="Ads.Model.Entities.Store.Categories" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ad">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CountryState">
+    <End Role="Country" Type="Ads.Model.Entities.Store.Countries" Multiplicity="1" />
+    <End Role="State" Type="Ads.Model.Entities.Store.States" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="State">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="StateCity">
+    <End Role="State" Type="Ads.Model.Entities.Store.States" Multiplicity="1" />
+    <End Role="City" Type="Ads.Model.Entities.Store.Cities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="StateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserAd">
+    <End Role="User" Type="Ads.Model.Entities.Store.Users" Multiplicity="1" />
+    <End Role="Ad" Type="Ads.Model.Entities.Store.Ads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ad">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AddressCity">
+    <End Role="Address" Type="Ads.Model.Entities.Store.Addresses" Multiplicity="*" />
+    <End Role="City" Type="Ads.Model.Entities.Store.Cities" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="City_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AdAdType">
+    <End Role="Ad" Type="Ads.Model.Entities.Store.Ads" Multiplicity="*" />
+    <End Role="AdType" Type="Ads.Model.Entities.Store.AdTypes" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="AdType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ad">
+        <PropertyRef Name="AdTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AdAddress">
+    <End Role="Ad" Type="Ads.Model.Entities.Store.Ads" Multiplicity="*" />
+    <End Role="Address" Type="Ads.Model.Entities.Store.Addresses" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ad">
+        <PropertyRef Name="AddressId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CategorySubCategory">
+    <End Role="Category" Type="Ads.Model.Entities.Store.Categories" Multiplicity="0..1" />
+    <End Role="Category1" Type="Ads.Model.Entities.Store.Categories" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Category1">
+        <PropertyRef Name="ParentCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+        <!-- CSDL content -->
+        <edmx:ConceptualModels>
+            <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Ads.Model.Entities" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+                <EntityContainer Name="AdsModelContainer" annotation:LazyLoadingEnabled="true">
+                    <EntitySet Name="Ads" EntityType="Ads.Model.Entities.Ad" />
+                    <EntitySet Name="Users" EntityType="Ads.Model.Entities.User" />
+                    <EntitySet Name="States" EntityType="Ads.Model.Entities.State" />
+                    <EntitySet Name="Categories" EntityType="Ads.Model.Entities.Category" />
+                    <EntitySet Name="Keywords" EntityType="Ads.Model.Entities.Keyword" />
+                    <EntitySet Name="Countries" EntityType="Ads.Model.Entities.Country" />
+                    <EntitySet Name="Cities" EntityType="Ads.Model.Entities.City" />
+                    <AssociationSet Name="AdCategory" Association="Ads.Model.Entities.AdCategory">
+                        <End Role="Ad" EntitySet="Ads" />
+                        <End Role="Category" EntitySet="Categories" />
+                    </AssociationSet>
+                    <EntitySet Name="Aspects" EntityType="Ads.Model.Entities.Aspect" />
+                    <AssociationSet Name="CountryState" Association="Ads.Model.Entities.CountryState">
+                        <End Role="Country" EntitySet="Countries" />
+                        <End Role="State" EntitySet="States" />
+                    </AssociationSet>
+                    <AssociationSet Name="StateCity" Association="Ads.Model.Entities.StateCity">
+                        <End Role="State" EntitySet="States" />
+                        <End Role="City" EntitySet="Cities" />
+                    </AssociationSet>
+                    <EntitySet Name="Addresses" EntityType="Ads.Model.Entities.Address" />
+                    <AssociationSet Name="UserAd" Association="Ads.Model.Entities.UserAd">
+                        <End Role="User" EntitySet="Users" />
+                        <End Role="Ad" EntitySet="Ads" />
+                    </AssociationSet>
+                    <AssociationSet Name="AddressCity" Association="Ads.Model.Entities.AddressCity">
+                        <End Role="Address" EntitySet="Addresses" />
+                        <End Role="City" EntitySet="Cities" />
+                    </AssociationSet>
+          <EntitySet Name="AdTypes" EntityType="Ads.Model.Entities.AdType" />
+          <AssociationSet Name="AdAdType" Association="Ads.Model.Entities.AdAdType">
+            <End Role="Ad" EntitySet="Ads" />
+            <End Role="AdType" EntitySet="AdTypes" />
+          </AssociationSet>
+          <AssociationSet Name="AdAddress" Association="Ads.Model.Entities.AdAddress">
+            <End Role="Ad" EntitySet="Ads" />
+            <End Role="Address" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="CategorySubCategory" Association="Ads.Model.Entities.CategorySubCategory">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Category1" EntitySet="Categories" />
+          </AssociationSet>
+                </EntityContainer>
+                <EntityType Name="Ad">
+                    <Key>
+                        <PropertyRef Name="Id" />
+                    </Key>
+                    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+                    <Property Type="String" Name="Description" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+                    <NavigationProperty Name="Category" Relationship="Ads.Model.Entities.AdCategory" FromRole="Ad" ToRole="Category" />
+                    <Property Type="Int32" Name="CategoryId" Nullable="false" />
+                    <Property Type="String" Name="Title" Nullable="false" />
+                    <NavigationProperty Name="User" Relationship="Ads.Model.Entities.UserAd" FromRole="Ad" ToRole="User" />
+                    <Property Type="Int32" Name="UserId" Nullable="false" />
+          <NavigationProperty Name="AdType" Relationship="Ads.Model.Entities.AdAdType" FromRole="Ad" ToRole="AdType" />
+          <Property Type="Int32" Name="AdTypeId" Nullable="false" />
+          <NavigationProperty Name="Address" Relationship="Ads.Model.Entities.AdAddress" FromRole="Ad" ToRole="Address" />
+          <Property Type="Int32" Name="AddressId" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="LastUpdatedOn" Nullable="false" />
+          <Property Type="Int32" Name="LastUpdatedBy" Nullable="false" />
+                </EntityType>
+                <EntityType Name="User">
+                    <Key>
+                        <PropertyRef Name="Id" />
+                    </Key>
+                    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+                    <Property Type="String" Name="DisplayName" Nullable="false" MaxLength="20" />
+                    <Property Type="String" Name="RealName" Nullable="false" MaxLength="40" />
+                    <Property Type="String" Name="Email" Nullable="false" MaxLength="40" />
+                    <Property Type="String" Name="OpenId" Nullable="false" />
+                    <Property Name="CreatedOn" Nullable="false" Type="DateTime" />
+                    <Property Name="CreatedBy" Nullable="false" Type="Int32" />
+                    <Property Name="LastUpdatedOn" Nullable="false" Type="DateTime" />
+                    <Property Name="LastUpdatedBy" Nullable="false" Type="Int32" />
+                    <NavigationProperty Name="Ads" Relationship="Ads.Model.Entities.UserAd" FromRole="User" ToRole="Ad" />
+                </EntityType>
+                <EntityType Name="State">
+                    <Key>
+                        <PropertyRef Name="Id" />
+                    </Key>
+                    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+                    <Property Type="String" Name="Name" Nullable="false" />
+                    <Property Type="String" Name="Abbriviation" Nullable="false" />
+                    <NavigationProperty Name="Country" Relationship="Ads.Model.Entities.CountryState" FromRole="State" ToRole="Country" />
+                    <Property Type="Int32" Name="CountryId" Nullable="false" />
+                    <NavigationProperty Name="Cities" Relationship="Ads.Model.Entities.StateCity" FromRole="State" ToRole="City" />
+                    </EntityType>
+                <EntityType Name="Category">
+                    <Key>
+                        <PropertyRef Name="Id" />
+                    </Key>
+                    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+                    <NavigationProperty Name="Ads" Relationship="Ads.Model.Entities.AdCategory" FromRole="Category" ToRole="Ad" />
+                    <Property Type="String" Name="AttDefXML" Nullable="true" />
+          <Property Type="String" Name="DisplayValue" Nullable="false" />
+          <NavigationProperty Name="SubCategories" Relationship="Ads.Model.Entities.CategorySubCategory" FromRole="Category" ToRole="Category1" />
+          <NavigationProperty Name="ParentCategory" Relationship="Ads.Model.Entities.CategorySubCategory" FromRole="Category1" ToRole="Category" />
+          <Property Type="Int32" Name="ParentCategoryId" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="false" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="LastUpdatedOn" Nullable="false" />
+          <Property Type="Int32" Name="LastUpdatedBy" Nullable="false" />
+                    </EntityType>
+                <EntityType Name="Keyword">
+                    <Key>
+                        <PropertyRef Name="Id" />
+                    </Key>
+                    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+                </EntityType>
+                <EntityType Name="Country">
+                    <Key>
+                        <PropertyRef Name="Id" />
+                    </Key>
+                    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+                    <NavigationProperty Name="States" Relationship="Ads.Model.Entities.CountryState" FromRole="Country" ToRole="State" />
+                    </EntityType>
+                <EntityType Name="City">
+                    <Key>
+                        <PropertyRef Name="Id" />
+                    </Key>
+                    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+                    <Property Type="String" Name="Name" Nullable="false" />
+                    <NavigationProperty Name="State" Relationship="Ads.Model.Entities.StateCity" FromRole="City" ToRole="State" />
+                    <Property Type="Int32" Name="StateId" Nullable="false" />
+                    <NavigationProperty Name="Addresses" Relationship="Ads.Model.Entities.AddressCity" FromRole="City" ToRole="Address" />
+                    </EntityType>
+                <Association Name="AdCategory">
+                    <End Type="Ads.Model.Entities.Ad" Role="Ad" Multiplicity="*" />
+                    <End Type="Ads.Model.Entities.Category" Role="Category" Multiplicity="1" />
+                    <ReferentialConstraint>
+                        <Principal Role="Category">
+                            <PropertyRef Name="Id" />
+                        </Principal>
+                        <Dependent Role="Ad">
+                            <PropertyRef Name="CategoryId" />
+                        </Dependent>
+                    </ReferentialConstraint>
+                </Association>
+                <EntityType Name="Aspect">
+                    <Key>
+                        <PropertyRef Name="Id" />
+                    </Key>
+                    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+                </EntityType>
+                <Association Name="CountryState">
+                    <End Type="Ads.Model.Entities.Country" Role="Country" Multiplicity="1" />
+                    <End Type="Ads.Model.Entities.State" Role="State" Multiplicity="*" />
+                    <ReferentialConstraint>
+                        <Principal Role="Country">
+                            <PropertyRef Name="Id" />
+                        </Principal>
+                        <Dependent Role="State">
+                            <PropertyRef Name="CountryId" />
+                        </Dependent>
+                    </ReferentialConstraint>
+                </Association>
+                <Association Name="StateCity">
+                    <End Type="Ads.Model.Entities.State" Role="State" Multiplicity="1" />
+                    <End Type="Ads.Model.Entities.City" Role="City" Multiplicity="*" />
+                    <ReferentialConstraint>
+                        <Principal Role="State">
+                            <PropertyRef Name="Id" />
+                        </Principal>
+                        <Dependent Role="City">
+                            <PropertyRef Name="StateId" />
+                        </Dependent>
+                    </ReferentialConstraint>
+                </Association>
+                <EntityType Name="Address">
+                    <Key>
+                        <PropertyRef Name="Id" />
+                    </Key>
+                    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+                    <NavigationProperty Name="City" Relationship="Ads.Model.Entities.AddressCity" FromRole="Address" ToRole="City" />
+                    <Property Type="String" Name="Property" Nullable="false" />
+          <NavigationProperty Name="Ads" Relationship="Ads.Model.Entities.AdAddress" FromRole="Address" ToRole="Ad" />
+                    </EntityType>
+                <Association Name="UserAd">
+                    <End Type="Ads.Model.Entities.User" Role="User" Multiplicity="1" />
+                    <End Type="Ads.Model.Entities.Ad" Role="Ad" Multiplicity="*" />
+                    <ReferentialConstraint>
+                        <Principal Role="User">
+                            <PropertyRef Name="Id" />
+                        </Principal>
+                        <Dependent Role="Ad">
+                            <PropertyRef Name="UserId" />
+                        </Dependent>
+                    </ReferentialConstraint>
+                </Association>
+                <Association Name="AddressCity">
+                    <End Type="Ads.Model.Entities.Address" Role="Address" Multiplicity="*" />
+                    <End Type="Ads.Model.Entities.City" Role="City" Multiplicity="1" />
+                </Association>
+        <EntityType Name="AdType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Ads" Relationship="Ads.Model.Entities.AdAdType" FromRole="AdType" ToRole="Ad" />
+        </EntityType>
+        <Association Name="AdAdType">
+          <End Type="Ads.Model.Entities.Ad" Role="Ad" Multiplicity="*" />
+          <End Type="Ads.Model.Entities.AdType" Role="AdType" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="AdType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ad">
+              <PropertyRef Name="AdTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AdAddress">
+          <End Type="Ads.Model.Entities.Ad" Role="Ad" Multiplicity="*" />
+          <End Type="Ads.Model.Entities.Address" Role="Address" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ad">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CategorySubCategory">
+          <End Type="Ads.Model.Entities.Category" Role="Category" Multiplicity="0..1" />
+          <End Type="Ads.Model.Entities.Category" Role="Category1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Category1">
+              <PropertyRef Name="ParentCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+            </Schema>
+        </edmx:ConceptualModels>
+        <!-- C-S mapping content -->
+        <edmx:Mappings>
+        <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AdsModelEntitiesStoreContainer" CdmEntityContainer="AdsModelContainer">
+    <EntitySetMapping Name="Ads">
+      <EntityTypeMapping TypeName="IsTypeOf(Ads.Model.Entities.Ad)">
+        <MappingFragment StoreEntitySet="Ads">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="AdTypeId" ColumnName="AdTypeId" />
+          <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="LastUpdatedOn" ColumnName="LastUpdatedOn" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(Ads.Model.Entities.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="RealName" ColumnName="RealName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="OpenId" ColumnName="OpenId" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="LastUpdatedOn" ColumnName="LastUpdatedOn" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="States">
+      <EntityTypeMapping TypeName="IsTypeOf(Ads.Model.Entities.State)">
+        <MappingFragment StoreEntitySet="States">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Abbriviation" ColumnName="Abbriviation" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="IsTypeOf(Ads.Model.Entities.Category)">
+        <MappingFragment StoreEntitySet="Categories">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AttDefXML" ColumnName="AttDefXML" />
+          <ScalarProperty Name="DisplayValue" ColumnName="DisplayValue" />
+          <ScalarProperty Name="ParentCategoryId" ColumnName="ParentCategoryId" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="LastUpdatedOn" ColumnName="LastUpdatedOn" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Keywords">
+      <EntityTypeMapping TypeName="IsTypeOf(Ads.Model.Entities.Keyword)">
+        <MappingFragment StoreEntitySet="Keywords">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Countries">
+      <EntityTypeMapping TypeName="IsTypeOf(Ads.Model.Entities.Country)">
+        <MappingFragment StoreEntitySet="Countries">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cities">
+      <EntityTypeMapping TypeName="IsTypeOf(Ads.Model.Entities.City)">
+        <MappingFragment StoreEntitySet="Cities">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="StateId" ColumnName="StateId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Aspects">
+      <EntityTypeMapping TypeName="IsTypeOf(Ads.Model.Entities.Aspect)">
+        <MappingFragment StoreEntitySet="Aspects">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Addresses">
+      <EntityTypeMapping TypeName="IsTypeOf(Ads.Model.Entities.Address)">
+        <MappingFragment StoreEntitySet="Addresses">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Property" ColumnName="Property" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AdTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(Ads.Model.Entities.AdType)">
+        <MappingFragment StoreEntitySet="AdTypes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="AddressCity" TypeName="Ads.Model.Entities.AddressCity" StoreEntitySet="Addresses">
+      <EndProperty Name="City">
+        <ScalarProperty Name="Id" ColumnName="City_Id" />
+      </EndProperty>
+      <EndProperty Name="Address">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+    </edmx:Runtime>
+    <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+    <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+        <edmx:Connection>
+            <DesignerInfoPropertySet>
+                <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+            </DesignerInfoPropertySet>
+        </edmx:Connection>
+        <edmx:Options>
+            <DesignerInfoPropertySet>
+                <DesignerProperty Name="ValidateOnBuild" Value="true" />
+                <DesignerProperty Name="EnablePluralization" Value="True" />
+                <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+                <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+            </DesignerInfoPropertySet>
+        </edmx:Options>
+        <!-- Diagram content (shape and connector positions) -->
+        <edmx:Diagrams>
+            <Diagram Name="AdsModel" >
+                <EntityTypeShape EntityType="Ads.Model.Entities.Ad" Width="1.5" PointX="5.875" PointY="4.125" Height="3.9033007812499996" />
+                <EntityTypeShape EntityType="Ads.Model.Entities.User" Width="1.5" PointX="0.75" PointY="3.75" Height="2.7494921874999996" />
+                <EntityTypeShape EntityType="Ads.Model.Entities.State" Width="1.5" PointX="11.125" PointY="4.125" Height="2.1725878906249996" />
+                <EntityTypeShape EntityType="Ads.Model.Entities.Category" Width="1.5" PointX="2.5" PointY="0.5" Height="1.787985026041667" />
+                <EntityTypeShape EntityType="Ads.Model.Entities.Keyword" Width="1.5" PointX="9.125" PointY="6.875" Height="1.2110807291666665" />
+                <EntityTypeShape EntityType="Ads.Model.Entities.Country" Width="1.5" PointX="11.125" PointY="0.75" Height="1.4033821614583335" IsExpanded="true" />
+                <EntityTypeShape EntityType="Ads.Model.Entities.City" Width="1.5" PointX="8.75" PointY="1.75" Height="1.9802864583333335" />
+                <AssociationConnector Association="Ads.Model.Entities.AdCategory">
+                    <ConnectorPoint PointX="7.28125" PointY="4.125" />
+                    <ConnectorPoint PointX="7.28125" PointY="2.6701871744791674" />
+                    <ConnectorPoint PointX="6.583333333333333" PointY="2.670187174479167" />
+          <ConnectorPoint PointX="6.416666666666667" PointY="2.6701871744791674" />
+          <ConnectorPoint PointX="4" PointY="2.6701871744791674" />
+                </AssociationConnector>
+                <EntityTypeShape EntityType="Ads.Model.Entities.Aspect" Width="1.5" PointX="3.25" PointY="6.25" Height="1.2110807291666668" />
+                <AssociationConnector Association="Ads.Model.Entities.CountryState">
+                    <ConnectorPoint PointX="11.875" PointY="2.1533821614583335" />
+                    <ConnectorPoint PointX="11.875" PointY="4.125" />
+                </AssociationConnector>
+                <AssociationConnector Association="Ads.Model.Entities.StateCity">
+                    <ConnectorPoint PointX="11.125" PointY="5.2112939453125" />
+                    <ConnectorPoint PointX="9.5" PointY="5.2112939453125" />
+          <ConnectorPoint PointX="9.5" PointY="3.7302864583333335" />
+                </AssociationConnector>
+                <EntityTypeShape EntityType="Ads.Model.Entities.Address" Width="1.5" PointX="5.625" PointY="0.625" Height="1.7879850260416665" />
+                <AssociationConnector Association="Ads.Model.Entities.UserAd">
+                    <ConnectorPoint PointX="2.25" PointY="5.5766910807291667" />
+                    <ConnectorPoint PointX="5.875" PointY="5.5766910807291667" />
+                </AssociationConnector>
+                <AssociationConnector Association="Ads.Model.Entities.AddressCity">
+                    <ConnectorPoint PointX="7.125" PointY="2.0814925130208333" />
+                    <ConnectorPoint PointX="7.197916666666667" PointY="2.0814925130208328" />
+          <ConnectorPoint PointX="7.364583333333333" PointY="2.0814925130208333" />
+          <ConnectorPoint PointX="8.75" PointY="2.0814925130208333" />
+                </AssociationConnector>
+        <EntityTypeShape EntityType="Ads.Model.Entities.AdType" Width="1.5" PointX="3.375" PointY="3.5" Height="1.2110807291666665" />
+        <AssociationConnector Association="Ads.Model.Entities.AdAdType">
+          <ConnectorPoint PointX="5.875" PointY="4.5141910807291667" />
+          <ConnectorPoint PointX="4.875" PointY="4.5141910807291667" />
+        </AssociationConnector>
+        <AssociationConnector Association="Ads.Model.Entities.AdAddress">
+          <ConnectorPoint PointX="6.5" PointY="4.125" />
+          <ConnectorPoint PointX="6.5" PointY="2.4129850260416665" />
+        </AssociationConnector>
+        <AssociationConnector Association="Ads.Model.Entities.CategorySubCategory">
+          <ConnectorPoint PointX="3.0319230769230767" PointY="2.864889322916667" />
+          <ConnectorPoint PointX="3.0319230769230767" PointY="3.114889322916667" />
+          <ConnectorPoint PointX="3.4784615384615383" PointY="3.114889322916667" />
+          <ConnectorPoint PointX="3.4784615384615383" PointY="2.864889322916667" />
+        </AssociationConnector>
+            </Diagram>
+        </edmx:Diagrams>
+    </edmx:Designer>
+</edmx:Edmx>

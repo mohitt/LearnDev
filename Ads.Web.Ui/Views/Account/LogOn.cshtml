@@ -1,0 +1,39 @@
+﻿@model Ads.Model.ViewModels.LogOnModel
+@{
+    ViewBag.Title = "Log On";
+}
+
+<h2>
+    Log On</h2>
+<p>
+    Please enter your username and password. @Html.ActionLink("Register", "Register") if you don't have an account.
+</p>
+@Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.")
+@using (Ajax.BeginForm("LogOn", "Account", null, null, new { id = "openid_form" })) {
+    <div>
+        <fieldset>
+            <legend>Sign-in or Create New Account</legend>
+            @if ((ViewBag.StatusMessage as string) != null) {
+                <div style="background-color: Orange; color: red; font-weight: bold; padding: 10px; border: 1px solid orange; margin-top: 5px; border-radius: 10px;">
+                    @ViewBag.StatusMessage
+                </div>
+            }
+            <div id="openid_choice">
+                <p>
+                    Please click your account provider:</p>
+                <div id="openid_btns">
+                </div>
+            </div>
+            <div id="openid_input_area">
+                @Html.TextBoxFor(m => m.OpenIdIdentifier, new { value = "http://" })
+                <input id="openid_submit" type="submit" value="Sign-In" />
+            </div>
+            <noscript>
+                <p>
+                    OpenID is service that allows you to log-on to many different websites using a single indentity. Find out <a href="http://openid.net/what/">more about OpenID</a> and <a href="http://openid.net/get/">how to get an OpenID enabled account</a>.</p>
+            </noscript>
+        </fieldset>
+    </div>
+    
+
+} 

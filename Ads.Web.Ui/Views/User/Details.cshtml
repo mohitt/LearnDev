@@ -1,0 +1,55 @@
+﻿@model Ads.Model.Entities.User
+@{
+    ViewBag.Title = "Detail";
+}
+<h2>
+    Detail</h2>
+<fieldset>
+    <div class="ui-state-highlight ui-corner-all ui-priority-primary" style="padding: 10px 5px 10px 5px; margin: 10px 0px 10px 0px">
+        <span class="ui-icon ui-icon-info" style="float: left; margin-right: 5px;"></span>Thanks a ton for creating an account. Following is the information for your review. Please edit and correct it.If you think following information is incorrext
+    </div>
+    <div class="display-label">
+        DisplayName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DisplayName)
+    </div>
+    <div class="display-label">
+        RealName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RealName)
+    </div>
+    <div class="display-label">
+        Email</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Email)
+    </div>
+    @*<div class="display-label">OpenId</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OpenId)
+    </div>
+
+    <div class="display-label">CreatedOn</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreatedOn)
+    </div>
+
+    <div class="display-label">CreatedBy</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreatedBy)
+    </div>
+
+    <div class="display-label">LastUpdatedOn</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LastUpdatedOn)
+    </div>
+
+    <div class="display-label">LastUpdatedBy</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LastUpdatedBy)
+    </div>*@
+</fieldset>
+@*<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+*@

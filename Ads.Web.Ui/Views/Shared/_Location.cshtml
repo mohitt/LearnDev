@@ -1,0 +1,31 @@
+﻿<div id="location">
+</div>
+<script type="text/javascript">
+    $(function () {
+
+        get_location();
+
+    });
+
+    function get_location() {
+        if (Modernizr.geolocation) {
+            navigator.geolocation.getCurrentPosition(show_map);
+        } else {
+            // no native support; maybe try Gears?
+            alert('no support for geolocation');
+        }
+    }
+
+    function show_map(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        //Using YQL and Yahoo PlaceFinder
+        //YQL for JSOP wrapping and placefinder for reverse geolocation
+        $.getJSON(encodeURI($.validator.format('http://query.yahooapis.com/v1/public/yql?q=select * from geo.placefinder where text="{0}, {1}" and gflags="R"&appid=OZkWBu5i&format=json&callback=?', latitude, longitude)),
+                    function (data) {
+                        //console.log(data);
+                        $('div#location').html(data.query.results.Result['city'] + '-' + data.query.results.Result['state'] + '-' + data.query.results.Result['country']);
+
+                    });
+    }
+</script>
