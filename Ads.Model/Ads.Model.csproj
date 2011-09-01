@@ -74,7 +74,6 @@
     <Compile Include="ViewModels\LogOnModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DropDatabase.sql" />
     <Content Include="Init.Sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
